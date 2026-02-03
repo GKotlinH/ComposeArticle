@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeArticleTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ComposeArticleApp()
+                    ComposeArticleApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -36,45 +36,41 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ComposeArticleApp() {
+fun ComposeArticleApp(modifier: Modifier = Modifier) {
     ArticleCard(
         title = stringResource(R.string.title_jetpack_compose_tutorial),
         shortDescription = stringResource(R.string.compose_short_desc),
         longDescription = stringResource(R.string.compose_long_desc),
-        imagePainter = painterResource(R.drawable.bg_compose_background)
+        imagePainter = painterResource(R.drawable.bg_compose_background),
+        modifier = modifier
     )
 }
 
 @Composable
 private fun ArticleCard(
-
     title: String,
-
     shortDescription: String,
-
     longDescription: String,
-
     imagePainter: Painter,
-
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
 
     Column(modifier = modifier) {
         Image(painter = imagePainter, contentDescription = null)
         Text(
             text = title,
-            fontSize = 24.sp,
-            modifier = modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            fontSize = 24.sp
         )
         Text(
             text = shortDescription,
-            textAlign = TextAlign.Justify,
-            modifier = modifier.padding(start = 16.dp, end = 16.dp)
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+            textAlign = TextAlign.Justify
         )
         Text(
             text = longDescription,
-            textAlign = TextAlign.Justify,
-            modifier = modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Justify
         )
     }
 }
@@ -82,7 +78,6 @@ private fun ArticleCard(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-
     ComposeArticleTheme {
         ComposeArticleApp()
     }
